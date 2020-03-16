@@ -143,6 +143,15 @@ public class CharacterDisplay : MonoBehaviour
                 TorsoEquipmentSpriteRenderer.sprite = CreateSprite(texture);
             });
         }
+        if (assetManifest.EquipmentManifest.GloveItems.Any())
+        {
+            var items = assetManifest.EquipmentManifest.GloveItems.ToArray();
+            var item = items[Random.Range(0, items.Length)];
+            yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture =>
+            {
+                GloveEquipmentSpriteRenderer.sprite = CreateSprite(texture);
+            });
+        }
         if (assetManifest.EquipmentManifest.LeftHandItems.Any())
         {
             var items = assetManifest.EquipmentManifest.LeftHandItems.ToArray();
