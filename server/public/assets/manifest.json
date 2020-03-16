@@ -1,0 +1,91 @@
+{
+  "character": {
+    "head_texture_path": "character/head.png",
+    "torso_texture_path": "character/torso.png",
+    "left_arm_texture_path": "character/left-arm.png",
+    "left_hand_texture_path": "character/left-hand.png",
+    "right_arm_texture_path": "character/right-arm.png",
+    "right_hand_texture_path": "character/right-hand.png",
+    "legs_texture_path": "character/legs.png",
+    "feet_texture_path": "character/feet.png",
+    "hair_styles": [
+      {
+        "id": "swept_right",
+        "name": "Swept Right",
+        "equipped_texture_path": "character/hair/swept-right/equipped.png"
+      }
+    ],
+    "facial_hair_styles": [
+      {
+        "id": "ducktail",
+        "name": "Ducktail",
+        "equipped_texture_path": "character/facial-hair/ducktail/equipped.png"
+      }
+    ]
+  },
+  "equipment": {
+    "back": [
+      {
+        "id": "red_cape",
+        "name": "Red Cape",
+        "equipped_texture_path": "equipment/back/capes/red-cape/equipped.png"
+      }
+    ],
+    "head": [
+      {
+        "id": "kettle_hat_helmet",
+        "name": "Kettle Hat Helmet",
+        "equipped_texture_path": "equipment/head/helmets/kettle-hat-helmet/equipped.png"
+      }
+    ],
+    "neck": [
+      {
+        "id": "brass_necklace",
+        "name": "Brass Necklace",
+        "equipped_texture_path": "equipment/neck/brass-necklace/equipped.png"
+      }
+    ],
+    "torso": [
+      {
+        "id": "green_peasant_shirt",
+        "name": "Green Peasant Shirt",
+        "equipped_texture_path": "equipment/torso/green-peasant-shirt/equipped.png"
+      }
+    ],
+    "gloves": [
+      {
+        "id": "leather_gloves",
+        "name": "Leather Gloves",
+        "equipped_texture_path": "equipment/gloves/leather-gloves/equipped.png"
+      }
+    ],
+    "left_hand": [
+      {
+        "id": "steel_buckler",
+        "name": "Steel Buckler",
+        "equipped_texture_path": "equipment/left-hand/shields/steel-buckler/equipped.png"
+      }
+    ],
+    "right_hand": [
+      {
+        "id": "steel_arming_sword",
+        "name": "Steel Arming Sword",
+        "equipped_texture_path": "equipment/right-hand/swords/steel-arming-sword/equipped.png"
+      }
+    ],
+    "legs": [
+      {
+        "id": "brown_peasant_pants",
+        "name": "Brown Peasant Pants",
+        "equipped_texture_path": "equipment/legs/brown-peasant-pants/equipped.png"
+      }
+    ],
+    "footwear": [
+      {
+        "id": "leather_boots",
+        "name": "Leather Boots",
+        "equipped_texture_path": "equipment/feet/leather-boots/equipped.png"
+      }
+    ]
+  }
+}

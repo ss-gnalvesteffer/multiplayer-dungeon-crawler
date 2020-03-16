@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-app.use(express.static('assets'));
+app.use(express.static('public'));
 
 io.on('connection', function(socket){
   console.log('a user connected');
