@@ -42,7 +42,7 @@ public class AssetManager : MonoBehaviour
 
         if (webRequest.isNetworkError || webRequest.isHttpError)
         {
-            Debug.Log(webRequest.error);
+            Debug.LogError($"Failed to download texture: {texturePath}");
         }
         else
         {

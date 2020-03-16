@@ -49,7 +49,7 @@
       {
         "id": "green_peasant_shirt",
         "name": "Green Peasant Shirt",
-        "equipped_texture_path": "equipment/torso/green-peasant-shirt/equipped.png"
+        "equipped_texture_path": "equipment/torso/shirts/green-peasant-shirt/equipped.png"
       }
     ],
     "gloves": [
