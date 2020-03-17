@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using Game.Scripts.Core;
 using Game.Scripts.Core.Models.Assets;
-using Socket.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 

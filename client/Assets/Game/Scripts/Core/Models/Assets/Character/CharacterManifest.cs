@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Socket.Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Game.Scripts.Core.Models.Assets.Character
 {

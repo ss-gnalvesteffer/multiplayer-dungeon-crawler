@@ -1,6 +1,6 @@
 namespace Game.Scripts.Core.Models.Assets.Items
 {
-    public class RightHandItem : ItemBase
+    public class RightHandItem : HandItemBase
     {
     }
 }

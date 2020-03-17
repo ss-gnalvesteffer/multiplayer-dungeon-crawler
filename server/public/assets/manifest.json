@@ -47,7 +47,7 @@
         "id": "kettle_hat_helmet",
         "name": "Kettle Hat Helmet",
         "equipped_texture_path": "equipment/head/helmets/kettle-hat-helmet/equipped.png",
-        "does_cover_facial_hair": false,
+        "does_hide_facial_hair": false,
         "stats": {
           "melee_accuracy": 0,
           "melee_strength": 0,
@@ -64,7 +64,7 @@
         "id": "winged_full_helm",
         "name": "Winged Full Helm",
         "equipped_texture_path": "equipment/head/helmets/winged-full-helm/equipped.png",
-        "does_cover_facial_hair": true,
+        "does_hide_facial_hair": true,
         "stats": {
           "melee_accuracy": -5,
           "melee_strength": 0,
@@ -119,11 +119,29 @@
         }
       }
     ],
-    "gloves": [
+    "left_gloves": [
       {
-        "id": "leather_gloves",
-        "name": "Leather Gloves",
-        "equipped_texture_path": "equipment/gloves/leather-gloves/equipped.png",
+        "id": "leather_glove_left",
+        "name": "Leather Glove (left)",
+        "equipped_texture_path": "equipment/gloves/leather-gloves/equipped-left.png",
+        "stats": {
+          "melee_accuracy": 0,
+          "melee_strength": 2,
+          "melee_defense": 2,
+          "ranged_accuracy": -2,
+          "ranged_strength": 2,
+          "ranged_defense": 1,
+          "magic_accuracy": 0,
+          "magic_strength": 0,
+          "magic_defense": -2
+        }
+      }
+    ],
+    "right_gloves": [
+      {
+        "id": "leather_glove_right",
+        "name": "Leather Glove (right)",
+        "equipped_texture_path": "equipment/gloves/leather-gloves/equipped-right.png",
         "stats": {
           "melee_accuracy": 0,
           "melee_strength": 2,
@@ -142,6 +160,7 @@
         "id": "steel_buckler",
         "name": "Steel Buckler",
         "equipped_texture_path": "equipment/left-hand/shields/steel-buckler/equipped.png",
+        "does_hide_hand": true,
         "stats": {
           "melee_accuracy": -10,
           "melee_strength": 0,
@@ -159,6 +178,7 @@
       {
         "id": "steel_arming_sword",
         "name": "Steel Arming Sword",
+        "does_hide_hand": false,
         "equipped_texture_path": "equipment/right-hand/swords/steel-arming-sword/equipped.png",
         "stats": {
           "melee_accuracy": 120,

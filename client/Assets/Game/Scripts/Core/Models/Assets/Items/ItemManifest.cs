@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Socket.Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Game.Scripts.Core.Models.Assets.Items
 {
@@ -17,8 +17,11 @@ namespace Game.Scripts.Core.Models.Assets.Items
         [JsonProperty("torso")]
         public IEnumerable<TorsoItem> TorsoItems { get; set; }
 
-        [JsonProperty("gloves")]
-        public IEnumerable<GloveItem> GloveItems { get; set; }
+        [JsonProperty("left_gloves")]
+        public IEnumerable<GloveItem> LeftGloveItems { get; set; }
+
+        [JsonProperty("right_gloves")]
+        public IEnumerable<GloveItem> RightGloveItems { get; set; }
 
         [JsonProperty("left_hand")]
         public IEnumerable<LeftHandItem> LeftHandItems { get; set; }
