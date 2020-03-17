@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5551263c8e75854087e5e1a25be5453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextMeshProInputField: {fileID: 1935689826}
 --- !u!4 &447626209
 Transform:
   m_ObjectHideFlags: 0
