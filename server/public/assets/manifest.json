@@ -36,6 +36,11 @@
         "id": "kettle_hat_helmet",
         "name": "Kettle Hat Helmet",
         "equipped_texture_path": "equipment/head/helmets/kettle-hat-helmet/equipped.png"
+      },
+      {
+        "id": "winged_full_helm",
+        "name": "Winged Full Helm",
+        "equipped_texture_path": "equipment/head/helmets/winged-full-helm/equipped.png"
       }
     ],
     "neck": [
@@ -50,6 +55,11 @@
         "id": "green_peasant_shirt",
         "name": "Green Peasant Shirt",
         "equipped_texture_path": "equipment/torso/shirts/green-peasant-shirt/equipped.png"
+      },
+      {
+        "id": "platebody",
+        "name": "Platebody",
+        "equipped_texture_path": "equipment/torso/armor/platebody/equipped.png"
       }
     ],
     "gloves": [
