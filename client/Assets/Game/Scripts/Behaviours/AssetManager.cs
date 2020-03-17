@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using Game.Scripts.Core;
 using Game.Scripts.Core.Models.Assets;
 using Socket.Newtonsoft.Json;
@@ -8,6 +9,8 @@ using UnityEngine.Networking;
 
 public class AssetManager : MonoBehaviour
 {
+    private ConcurrentDictionary<string, Texture2D> _texturesByPaths = new ConcurrentDictionary<string, Texture2D>();
+
     public static AssetManager Instance { get; private set; }
 
     public AssetManifest AssetManifest { get; private set; }
@@ -35,6 +38,12 @@ public class AssetManager : MonoBehaviour
 
     public IEnumerator GetTexture(string texturePath, Action<Texture2D> onTextureRetrieved)
     {
+        if (_texturesByPaths.ContainsKey(texturePath))
+        {
+            onTextureRetrieved(_texturesByPaths[texturePath]);
+            yield return null;
+        }
+
         yield return new WaitUntil(() => AssetManifest != null);
 
         var webRequest = UnityWebRequestTexture.GetTexture($"{Config.AssetsUrl}/{texturePath}");
@@ -47,6 +56,7 @@ public class AssetManager : MonoBehaviour
         else
         {
             var texture = ((DownloadHandlerTexture)webRequest.downloadHandler).texture;
+            _texturesByPaths.TryAdd(texturePath, texture);
             onTextureRetrieved(texture);
         }
     }
