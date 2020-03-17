@@ -1,6 +1,6 @@
 using Game.Scripts.Core.Models.Assets.Character;
 using Game.Scripts.Core.Models.Assets.Items;
-using Socket.Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Game.Scripts.Core.Models.Assets
 {
