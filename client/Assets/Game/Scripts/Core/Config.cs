@@ -4,6 +4,6 @@ namespace Game.Scripts.Core
     {
         public static string ServerUrl { get; set; } = "http://localhost:3000";
         public static string AssetsUrl { get; set; } = $"{ServerUrl}/assets";
-        public static string ManifestUrl { get; set; } = $"{AssetsUrl}/manifest.json";
+        public static string ManifestUrl { get; set; } = $"{ServerUrl}/assetmanifest";
     }
 }
