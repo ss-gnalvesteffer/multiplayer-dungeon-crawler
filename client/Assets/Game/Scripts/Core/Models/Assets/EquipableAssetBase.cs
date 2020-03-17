@@ -2,15 +2,15 @@ using Socket.Newtonsoft.Json;
 
 namespace Game.Scripts.Core.Models.Assets
 {
-    public interface IAsset
+    public abstract class EquipableAssetBase
     {
         [JsonProperty("id")]
-        string Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("name")]
-        string Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("equipped_texture_path")]
-        string EquippedTexturePath { get; set; }
+        public string EquippedTexturePath { get; set; }
     }
 }

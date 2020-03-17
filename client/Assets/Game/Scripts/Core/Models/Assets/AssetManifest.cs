@@ -1,5 +1,5 @@
 using Game.Scripts.Core.Models.Assets.Character;
-using Game.Scripts.Core.Models.Assets.Equipment;
+using Game.Scripts.Core.Models.Assets.Items;
 using Socket.Newtonsoft.Json;
 
 namespace Game.Scripts.Core.Models.Assets
@@ -9,7 +9,7 @@ namespace Game.Scripts.Core.Models.Assets
         [JsonProperty("character")]
         public CharacterManifest CharacterManifest { get; set; }
 
-        [JsonProperty("equipment")]
-        public EquipmentManifest EquipmentManifest { get; set; }
+        [JsonProperty("items")]
+        public ItemManifest ItemManifest { get; set; }
     }
 }

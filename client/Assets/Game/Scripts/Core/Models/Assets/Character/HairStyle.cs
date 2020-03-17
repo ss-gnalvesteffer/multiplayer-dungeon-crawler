@@ -1,9 +1,6 @@
 namespace Game.Scripts.Core.Models.Assets.Character
 {
-    public class HairStyle : IAsset
+    public class HairStyle : EquipableAssetBase
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string EquippedTexturePath { get; set; }
     }
 }

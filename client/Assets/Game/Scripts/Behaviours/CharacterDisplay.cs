@@ -24,7 +24,7 @@ public class CharacterDisplay : MonoBehaviour
     public SpriteRenderer LeftHandEquipmentSpriteRenderer;
     public SpriteRenderer TorsoEquipmentSpriteRenderer;
     public SpriteRenderer LegEquipmentSpriteRenderer;
-    public SpriteRenderer FootwearEquipmentSpriteRenderer;
+    public SpriteRenderer FeetEquipmentSpriteRenderer;
     public SpriteRenderer BackEquipmentSpriteRenderer;
 
     private void Start()
@@ -112,57 +112,57 @@ public class CharacterDisplay : MonoBehaviour
             });
         }
 
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.BackItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.BackItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.BackItems.ToArray();
+            var items = assetManifest.ItemManifest.BackItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { BackEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.FootwearItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.FeetItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.FootwearItems.ToArray();
+            var items = assetManifest.ItemManifest.FeetItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
-            yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { FootwearEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
+            yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { FeetEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.LegItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.LegItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.LegItems.ToArray();
+            var items = assetManifest.ItemManifest.LegItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { LegEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.TorsoItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.TorsoItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.TorsoItems.ToArray();
+            var items = assetManifest.ItemManifest.TorsoItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { TorsoEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.GloveItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.GloveItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.GloveItems.ToArray();
+            var items = assetManifest.ItemManifest.GloveItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { GloveEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.LeftHandItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.LeftHandItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.LeftHandItems.ToArray();
+            var items = assetManifest.ItemManifest.LeftHandItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { LeftHandEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.RightHandItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.RightHandItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.RightHandItems.ToArray();
+            var items = assetManifest.ItemManifest.RightHandItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { RightHandEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.NeckItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.NeckItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.NeckItems.ToArray();
+            var items = assetManifest.ItemManifest.NeckItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { NeckEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
-        if (Random.value <= 0.5f && assetManifest.EquipmentManifest.HeadItems.Any())
+        if (Random.value <= 0.5f && assetManifest.ItemManifest.HeadItems.Any())
         {
-            var items = assetManifest.EquipmentManifest.HeadItems.ToArray();
+            var items = assetManifest.ItemManifest.HeadItems.ToArray();
             var item = items[Random.Range(0, items.Length)];
             yield return AssetManager.Instance.GetTexture(item.EquippedTexturePath, texture => { HeadEquipmentSpriteRenderer.sprite = CreateSprite(texture); });
         }
