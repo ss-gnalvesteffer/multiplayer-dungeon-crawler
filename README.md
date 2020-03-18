@@ -12,3 +12,12 @@ Starts the server and the client. Launch http://localhost:3000 to see everything
 
 ## start 
 Starts the server but not the client. This assumes that everything has been built into `client/dist`. Launch http://localhost:3000 to see everything.
+
+## lint
+Lints all js and less files
+
+## lint-js
+Lints js files
+
+## lint-less
+Lints less files
