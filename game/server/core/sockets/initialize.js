@@ -7,12 +7,11 @@ const initializeSocket = http => {
     console.log('a client connected');
 
     socket.on('message', (message) => {
-      const { type, data } = message;
-      const messageHandler = messageHandlers[type];
+      const messageHandler = messageHandlers[message.type];
       if (messageHandler) {
         messageHandler(message, socket);
       } else {
-        console.error(`missing message handler for type "${type}"`);
+        console.error(`missing message handler for type "${message.type}"`);
       }
     });
   });
