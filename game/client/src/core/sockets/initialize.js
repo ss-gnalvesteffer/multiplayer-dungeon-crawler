@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import messageHandlers from './message-handlers/index.js';
 
 const initializeSocket = () => {
