@@ -4,14 +4,15 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const assetManifest = require('./asset-manifest');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('../../webpack.config');
 
 const isDev = process.argv[2] !== undefined;
 
 if (isDev) {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpackConfig = require('../../webpack.config');
+
   webpackConfig.mode = 'development';
   //reload=true:Enable auto reloading when changing JS files or content
   //timeout=1000:Time from disconnecting from server to reconnecting
