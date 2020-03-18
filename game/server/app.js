@@ -17,5 +17,9 @@ http.listen(3000, () => {
 
 // Socket.io
 io.on('connection', socket => {
-  console.log('a user connected');
+  console.log('a client connected');
+
+  socket.on('debug', message => {
+    console.log(message);
+  })
 });
