@@ -308,4 +308,10 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+.idea/*
+
 # End of https://www.gitignore.io/api/unity
+
+# Custom
+style.css
+style.css.map
