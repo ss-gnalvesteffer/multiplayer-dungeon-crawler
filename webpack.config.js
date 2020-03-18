@@ -5,9 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	// mode: 'production',
-	entry: [
-		'./game/client/src/index.js',
-	],
+	entry: {
+		index: [
+			'./game/client/src/index.js',
+		]
+	},
 	devServer: {
 		hot: true,
 		watchOptions: {
@@ -45,7 +47,7 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 		path: path.join(__dirname, '/game/client/dist'),
-		publicPath: 'dist/'
+		publicPath: '/dist/'
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
