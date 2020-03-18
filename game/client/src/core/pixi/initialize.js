@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js'
+
 const initializePixi = () => {
   const type = PIXI.utils.isWebGLSupported() ? 'WebGL' : 'canvas';
   PIXI.utils.sayHello(type);
