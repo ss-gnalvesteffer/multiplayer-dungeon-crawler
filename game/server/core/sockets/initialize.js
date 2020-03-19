@@ -1,6 +1,6 @@
 const messageHandlers = require('./message-handlers');
 
-const initializeSocket = http => {
+const initializeSocket = ({http, redisClient}) => {
   const io = require('socket.io')(http);
 
   io.on('connection', socket => {
@@ -9,7 +9,7 @@ const initializeSocket = http => {
     socket.on('message', (message) => {
       const messageHandler = messageHandlers[message.type];
       if (messageHandler) {
-        messageHandler(message, socket);
+        messageHandler({message, socketIo: io, socket, redisClient});
       } else {
         console.error(`missing message handler for type "${message.type}"`);
       }

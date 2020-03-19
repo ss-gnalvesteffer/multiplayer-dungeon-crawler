@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './style.less';
 
-const ChatMessage = ({author, message}) => {
+const ChatMessage = ({username, message}) => {
   return (
     <div className={style['chat-message']}>
-      <div className={style.author}>{author}:&nbsp;</div>
+      <div className={style.username}>{username}:&nbsp;</div>
       <div>{message}</div>
     </div>
   );

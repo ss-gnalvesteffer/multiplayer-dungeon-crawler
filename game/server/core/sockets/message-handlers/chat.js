@@ -1,13 +1,6 @@
-const uuid = require('uuid').v4;
+const ChatMessageHandlingService = require('./chat-message-handling/chat-message-handling-service');
 
-module.exports = (message, socket) => {
+module.exports = ({message, socketIo, socket, redisClient}) => {
   console.log(`[CHAT] ${message.data.username}: ${message.data.message}`);
-  socket.broadcast.emit('message', {
-    type: 'chat',
-    data: {
-      id: uuid(),
-      username: message.data.username,
-      message: message.data.message,
-    },
-  });
+  new ChatMessageHandlingService({socketIo, socket, redisClient}).handleChatMessage(message.data);
 };

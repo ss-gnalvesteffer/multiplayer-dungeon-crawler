@@ -3,12 +3,11 @@ import React from 'react';
 import ChatBox from './components/chat-box';
 import style from './app.less';
 
-const MAX_CHAT_MESSAGES = 20;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: {},
       chat: {
         messages: [],
       },
@@ -17,17 +16,24 @@ class App extends React.Component {
     const socket = io();
     socket.on('message', ({type, data}) => {
       if (type === 'chat') {
-        const allChatMessages = [
-          ...this.state.chat.messages,
-          data,
-        ];
-        const latestChatMessages = allChatMessages.slice(Math.max(allChatMessages.length - MAX_CHAT_MESSAGES, 0));
         this.setState({
           chat: {
             ...this.state.chat,
-            messages: latestChatMessages,
+            messages: [
+              ...this.state.chat.messages,
+              data,
+            ],
           }
         });
+      } else if (type === 'login') {
+        const {username, authToken} = data;
+        this.setState({
+          user: {
+            ...this.state.user,
+            username,
+            authToken,
+          }
+        })
       }
     });
 
@@ -35,7 +41,8 @@ class App extends React.Component {
       socket.emit('message', {
         type: 'chat',
         data: {
-          username: 'tester', // ToDo: grab username from state
+          authToken: this.state.user.authToken,
+          username: this.state.user.username,
           message,
         }
       });
@@ -46,12 +53,13 @@ class App extends React.Component {
     // ToDo: setup Pixi
   }
 
-
   render() {
     return (
       <div className={style.app}>
         <div className="canvas-container"/>
-        <ChatBox chatMessages={this.state.chat.messages} onSendChatMessage={this.onSendChatMessage}/>
+        <ChatBox
+          chatMessages={this.state.chat.messages}
+          onSendChatMessage={this.onSendChatMessage}/>
       </div>
     );
   }
