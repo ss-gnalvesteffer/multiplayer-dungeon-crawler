@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import React from 'react';
+import initializePixi from './core/pixi/initialize';
 import ChatBox from './components/chat-box';
 import style from './app.less';
 
@@ -50,7 +51,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // ToDo: setup Pixi
+    initializePixi();
   }
 
   render() {

@@ -9,7 +9,7 @@ const initializePixi = () => {
     height: 200,
     resolution: 3,
   });
-  document.querySelector('.canvas-container').appendChild(app.view);
+  document.getElementById('pixi-container').appendChild(app.view);
 };
 
 export default initializePixi;
