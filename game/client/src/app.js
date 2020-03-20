@@ -59,7 +59,9 @@ class App extends React.Component {
         <div className="canvas-container"/>
         <ChatBox
           chatMessages={this.state.chat.messages}
-          onSendChatMessage={this.onSendChatMessage}/>
+          onSendChatMessage={this.onSendChatMessage}
+          username={this.state.user.username}
+        />
       </div>
     );
   }

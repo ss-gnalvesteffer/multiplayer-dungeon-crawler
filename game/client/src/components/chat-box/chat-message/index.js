@@ -5,7 +5,7 @@ const ChatMessage = ({username, message}) => {
   return (
     <div className={style['chat-message']}>
       <div className={style.username}>{username}:&nbsp;</div>
-      <div>{message}</div>
+      <div className={style.message}>{message}</div>
     </div>
   );
 };

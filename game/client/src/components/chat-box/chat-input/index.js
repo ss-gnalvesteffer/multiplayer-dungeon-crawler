@@ -5,40 +5,29 @@ export default class ChatInput extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      message: '',
-    };
-
     this.onKeyDown = (event) => {
       if (event.key === 'Enter') {
-        const message = this.state.message.trim();
+        const message = event.target.innerText.trim();
         if (message.length > 0) {
           this.props.onSendChatMessage(message);
-          this.setState({
-            message: '',
-          });
+          event.target.innerText = '';
+          event.preventDefault();
         }
       }
-    };
-
-    this.onInput = (event) => {
-      this.setState({
-        message: event.target.value,
-      });
     };
   }
 
   render() {
     return (
-      <input
-        type='text'
-        maxLength={200}
-        onKeyDown={this.onKeyDown}
-        onChange={this.onInput}
-        value={this.state.message}
-        placeholder='Type a message and press Enter to send...'
-        className={style['chat-input']}
-      />
+      <div className={style['chat-input']}>
+        {this.props.username && <div>{this.props.username}:&nbsp;</div>}
+        <div
+          className={style.input}
+          onKeyDown={this.onKeyDown}
+          contentEditable
+        />
+        <div className={style.cursor}>*</div>
+      </div>
     );
   }
 }
