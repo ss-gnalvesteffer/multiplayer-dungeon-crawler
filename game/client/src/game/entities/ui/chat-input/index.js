@@ -1,29 +1,21 @@
-import { Text, TextStyle } from 'pixi.js';
 import Keyboard from 'pixi.js-keyboard';
 import Entity from '../../entity-base';
+import Text from '../text';
 import Game from '../../../index';
 import chatInputKeyCodesToStrings from './chat-input-key-codes-to-strings';
 
 const maxMessageLength = 45;
 const xPosition = 2;
-const yPosition = 232;
+const yPosition = 233;
 
 export default class ChatInput extends Entity {
   constructor() {
     super();
-    this.playerNameText = new Text('', new TextStyle({
-      fontFamily: "game",
-      fontSize: 6,
-      fill: '#000000',
-    }));
+    this.playerNameText = new Text('', {fill: '#000000'});
     this.playerNameText.position.set(xPosition, yPosition);
     this.addToStage(this.playerNameText);
 
-    this.inputMessageText = new Text('', new TextStyle({
-      fontFamily: "game",
-      fontSize: 6,
-      fill: '#0000ff',
-    }));
+    this.inputMessageText = new Text('', {fill: '#0000ff'});
     this.addToStage(this.inputMessageText);
   }
 

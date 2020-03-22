@@ -11,7 +11,9 @@ export default class Game {
   static instance;
 
   state = {
-    user: {},
+    user: {
+      position: {},
+    },
     chat: {
       inputMessage: '',
       messages: [],
@@ -20,6 +22,9 @@ export default class Game {
       messages: []
     },
     entities: {},
+    map: {
+
+    },
   };
 
   constructor(containerElement) {
@@ -30,7 +35,7 @@ export default class Game {
       width: 320,
       height: 240,
       antialias: false,
-      resolution: window.devicePixelRatio * 10,
+      resolution: window.devicePixelRatio * 8,
     });
     this.pixiApp.view.addEventListener('contextmenu', (event) => {
       window.wasRightClick = true;

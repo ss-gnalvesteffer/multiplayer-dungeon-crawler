@@ -2,7 +2,7 @@ import Entity from '../../entity-base';
 import ChatMessage from '../chat-message';
 
 const xPosition = 2;
-const yPosition = 230;
+const yPosition = 231;
 const messageHeight = 6;
 const totalMessagesToDisplay = 12;
 
