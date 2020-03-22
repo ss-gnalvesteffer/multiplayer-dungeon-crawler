@@ -3,6 +3,7 @@ import Keyboard from 'pixi.js-keyboard';
 import SocketIoClient from './core/socket-io-client';
 import AssetLoader from './core/asset-loader';
 import UILayout from './entities/ui/ui-layout';
+import ChatLog from './entities/ui/chat-log';
 import ChatInput from './entities/ui/chat-input';
 
 export default class Game {
@@ -39,12 +40,12 @@ export default class Game {
   }
 
   addEntity = (entity) => {
-    this.state.entities[entity] = entity;
-    entity.initialize();
+    this.state.entities[entity.id] = entity;
   };
 
   removeEntity = (entity) => {
-    delete this.state.entities[entity];
+    entity.destroy();
+    delete this.state.entities[entity.id];
   };
 
   start = () => {
@@ -52,13 +53,13 @@ export default class Game {
       this.socketIoClient.start();
       this.pixiApp.ticker.add(this.update);
       this.addEntity(new UILayout());
+      this.addEntity(new ChatLog());
       this.addEntity(new ChatInput());
     });
   };
 
   update = (deltaTime) => {
-    this.state.log.messages = [`deltaTime: ${deltaTime}`];
-    Object.keys(this.state.entities).forEach(entityKey => this.state.entities[entityKey].update(deltaTime));
+    Object.keys(this.state.entities).forEach(entityId => this.state.entities[entityId].update(deltaTime));
     Keyboard.update();
   };
 }

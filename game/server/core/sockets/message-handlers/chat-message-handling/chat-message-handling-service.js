@@ -1,5 +1,5 @@
 const uuid = require('uuid').v4;
-const AccountService = require('../../../game/account/account-service');
+const {AccountService} = require('../../../game/account/account-service');
 
 const commandHandlers = {
   'register': require('./command-handlers/register'),
@@ -49,7 +49,9 @@ class ChatMessageHandlingService {
         })
         .catch();
     } else {
-      this.sendChatMessage('[SYSTEM]', 'You are not logged in. Register or login via "::register USERNAME PASSWORD" or "::login USERNAME PASSWORD"');
+      this.sendChatMessage('[SYSTEM]', 'You are not logged in.');
+      this.sendChatMessage('[SYSTEM]', 'Register via "::register USERNAME PASSWORD"');
+      this.sendChatMessage('[SYSTEM]', 'Login via "::login USERNAME PASSWORD"');
     }
   }
 }

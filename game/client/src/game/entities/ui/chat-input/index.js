@@ -2,87 +2,30 @@ import { Text, TextStyle } from 'pixi.js';
 import Keyboard from 'pixi.js-keyboard';
 import Entity from '../../entity-base';
 import Game from '../../../index';
-
-// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values
-const chatInputKeyCodesToStrings = {
-  'Digit0': '0',
-  'Shift-Digit0': ')',
-  'Digit1': '1',
-  'Shift-Digit1': '!',
-  'Digit2': '2',
-  'Shift-Digit2': '@',
-  'Digit3': '3',
-  'Shift-Digit3': '#',
-  'Digit4': '4',
-  'Shift-Digit4': '$',
-  'Digit5': '5',
-  'Shift-Digit5': '%',
-  'Digit6': '6',
-  'Shift-Digit6': '^',
-  'Digit7': '7',
-  'Shift-Digit7': '&',
-  'Digit8': '8',
-  'Shift-Digit8': '*',
-  'Digit9': '9',
-  'Shift-Digit9': '(',
-  'Semicolon': ';',
-  'Shift-Semicolon': ':',
-  'Quote': '\'',
-  'Shift-Quote': '"',
-  'Backslash': '\\',
-  'Shift-Backslash': '|',
-  'Minus': '-',
-  'Shift-Minus': '_',
-  'Equal': '=',
-  'Shift-Equal': '+',
-  'KeyA': 'a',
-  'KeyB': 'b',
-  'KeyC': 'c',
-  'KeyD': 'd',
-  'KeyE': 'e',
-  'KeyF': 'f',
-  'KeyG': 'g',
-  'KeyH': 'h',
-  'KeyI': 'i',
-  'KeyJ': 'j',
-  'KeyK': 'k',
-  'KeyL': 'l',
-  'KeyM': 'm',
-  'KeyN': 'n',
-  'KeyO': 'o',
-  'KeyP': 'p',
-  'KeyQ': 'q',
-  'KeyR': 'r',
-  'KeyS': 's',
-  'KeyT': 't',
-  'KeyU': 'u',
-  'KeyV': 'v',
-  'KeyW': 'w',
-  'KeyX': 'x',
-  'KeyY': 'y',
-  'KeyZ': 'z',
-  'Space': ' ',
-};
+import chatInputKeyCodesToStrings from './chat-input-key-codes-to-strings';
 
 const maxMessageLength = 45;
+const xPosition = 2;
+const yPosition = 232;
 
 export default class ChatInput extends Entity {
-  initialize = () => {
+  constructor() {
+    super();
     this.playerNameText = new Text('', new TextStyle({
       fontFamily: "game",
       fontSize: 6,
       fill: '#000000',
     }));
-    this.playerNameText.position.set(2, 230);
-    Game.instance.pixiApp.stage.addChild(this.playerNameText);
+    this.playerNameText.position.set(xPosition, yPosition);
+    this.addToStage(this.playerNameText);
 
     this.inputMessageText = new Text('', new TextStyle({
       fontFamily: "game",
       fontSize: 6,
       fill: '#0000ff',
     }));
-    Game.instance.pixiApp.stage.addChild(this.inputMessageText);
-  };
+    this.addToStage(this.inputMessageText);
+  }
 
   update = () => {
     const game = Game.instance;
@@ -98,7 +41,7 @@ export default class ChatInput extends Entity {
     // process input
     if (Keyboard.isKeyPressed('Backspace')) {
       chatState.inputMessage = chatState.inputMessage.substring(0, chatState.inputMessage.length - 1);
-    } else if (Keyboard.isKeyPressed('Enter')) {
+    } else if (Keyboard.isKeyPressed('Enter') && chatState.inputMessage) {
       game.socketIoClient.sendChatMessage(chatState.inputMessage);
       chatState.inputMessage = '';
     } else {
@@ -112,6 +55,6 @@ export default class ChatInput extends Entity {
     }
 
     this.inputMessageText.text = `${chatState.inputMessage}*`;
-    this.inputMessageText.position.set(this.playerNameText.width, 230);
+    this.inputMessageText.position.set(this.playerNameText.width, yPosition);
   };
 }

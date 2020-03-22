@@ -1,7 +1,10 @@
 const {promisify} = require('util');
 const uuid = require('uuid').v4;
 
-class AccountService {
+exports.maxUsernameLength = 12;
+exports.maxPasswordLength = 25;
+
+exports.AccountService = class AccountService {
   constructor({socket, redisClient}) {
     this.socket = socket;
     this.redisClientGetAsync = promisify(redisClient.get).bind(redisClient);
@@ -91,5 +94,3 @@ class AccountService {
       .catch(onLoginFail);
   }
 }
-
-module.exports = AccountService;

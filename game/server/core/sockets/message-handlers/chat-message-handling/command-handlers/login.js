@@ -1,4 +1,4 @@
-const AccountService = require('../../../../game/account/account-service');
+const {AccountService} = require('../../../../game/account/account-service');
 
 module.exports = ({message, sendChatMessage, socket, redisClient}) => {
   if (message.length !== 2) {
