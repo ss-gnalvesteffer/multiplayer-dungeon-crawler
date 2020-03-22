@@ -5,6 +5,7 @@ import AssetLoader from './core/asset-loader';
 import UILayout from './entities/ui/ui-layout';
 import ChatLog from './entities/ui/chat-log';
 import ChatInput from './entities/ui/chat-input';
+import MainDisplay from './entities/main-display';
 
 export default class Game {
   static instance;
@@ -29,7 +30,7 @@ export default class Game {
       width: 320,
       height: 240,
       antialias: false,
-      resolution: window.innerHeight / 240,
+      resolution: window.devicePixelRatio * 10,
     });
     this.pixiApp.view.addEventListener('contextmenu', (event) => {
       window.wasRightClick = true;
@@ -52,6 +53,7 @@ export default class Game {
     this.assetLoader.loadAssets(() => {
       this.socketIoClient.start();
       this.pixiApp.ticker.add(this.update);
+      this.addEntity(new MainDisplay());
       this.addEntity(new UILayout());
       this.addEntity(new ChatLog());
       this.addEntity(new ChatInput());

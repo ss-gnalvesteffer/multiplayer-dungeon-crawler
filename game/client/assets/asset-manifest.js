@@ -14,6 +14,12 @@ module.exports = {
   ui: {
     layout_texture_path: 'assets/ui/ui-layout.png',
   },
+  environment: {
+    grassland: {
+      name: 'Grassland',
+      base_texture_path: 'assets/environment/grassland/base.png',
+    },
+  },
   character: {
     head_texture_path: 'assets/character/head.png',
     torso_texture_path: 'assets/character/torso.png',

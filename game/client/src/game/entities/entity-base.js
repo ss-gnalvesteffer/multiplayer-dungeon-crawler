@@ -1,9 +1,14 @@
 import { v4 } from 'uuid';
 import Game from '../index';
+import { Loader } from 'pixi.js';
 
 export default class Entity {
   id = v4();
   graphics = {};
+
+  getTexture = (texturePath) => {
+    return Loader.shared.resources[texturePath].texture;
+  };
 
   addToStage = (graphic) => {
     Game.instance.pixiApp.stage.addChild(graphic);
