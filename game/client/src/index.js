@@ -1,7 +1,3 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import './style.less';
-import App from './app';
+import Game from './game'
 
-const appElement = document.getElementById('app');
-ReactDom.render(<App />, appElement);
+new Game(document.getElementById('pixi-container')).start();
