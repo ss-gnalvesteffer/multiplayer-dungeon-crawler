@@ -1,4 +1,4 @@
-import Text from '../text';
+import Text from '../core/text';
 import Entity from '../../entity-base';
 import Game from '../../../index';
 

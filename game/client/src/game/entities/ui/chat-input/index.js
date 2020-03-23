@@ -1,6 +1,6 @@
 import Keyboard from 'pixi.js-keyboard';
 import Entity from '../../entity-base';
-import Text from '../text';
+import Text from '../core/text';
 import Game from '../../../index';
 import chatInputKeyCodesToStrings from './chat-input-key-codes-to-strings';
 
@@ -22,7 +22,7 @@ export default class ChatInput extends Entity {
   update = () => {
     const game = Game.instance;
     const chatState = game.state.chat;
-    const username = game.state.user.username;
+    const username = game.state.player.username;
 
     if (username) {
       this.playerNameText.text = `${username}: `;
@@ -34,7 +34,7 @@ export default class ChatInput extends Entity {
     if (Keyboard.isKeyPressed('Backspace')) {
       chatState.inputMessage = chatState.inputMessage.substring(0, chatState.inputMessage.length - 1);
     } else if (Keyboard.isKeyPressed('Enter') && chatState.inputMessage) {
-      game.socketIoClient.sendChatMessage(chatState.inputMessage);
+      game.context.chat.sendChatMessage(chatState.inputMessage);
       chatState.inputMessage = '';
     } else {
       const isShiftDown = Keyboard.isKeyDown('ShiftLeft') || Keyboard.isKeyDown('ShiftRight');
