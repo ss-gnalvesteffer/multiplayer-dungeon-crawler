@@ -4,9 +4,9 @@ const uuid = require('uuid').v4;
 exports.maxUsernameLength = 12;
 exports.maxPasswordLength = 25;
 
-exports.AccountService = class AccountService {
-  constructor({socket, redisClient}) {
-    this.socket = socket;
+class AccountService {
+  constructor() {
+    const redisClient = global.gameServer.redisClient;
     this.redisClientGetAsync = promisify(redisClient.get).bind(redisClient);
     this.redisClientSetAsync = promisify(redisClient.set).bind(redisClient);
   }
@@ -72,14 +72,7 @@ exports.AccountService = class AccountService {
               if (password === accountPassword) {
                 this.setAuthToken(username, uuid())
                   .then((authToken) => {
-                    this.socket.emit('message', {
-                      type: 'login',
-                      data: {
-                        username,
-                        authToken,
-                      }
-                    });
-                    onLoginSuccess();
+                    onLoginSuccess(authToken);
                   })
                   .catch(onLoginFail);
                 return;
@@ -94,3 +87,5 @@ exports.AccountService = class AccountService {
       .catch(onLoginFail);
   }
 }
+
+module.exports = AccountService;

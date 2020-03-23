@@ -29,7 +29,7 @@ export default class Game {
     map: {},
   };
 
-  constructor(containerElement) {
+  constructor(canvas) {
     Game.instance = this;
     this.context = new Context();
     this.socketIoClient = new SocketIoClient();
@@ -40,12 +40,12 @@ export default class Game {
       height: 240,
       antialias: false,
       resolution: this.resolution,
+      view: canvas,
     });
     this.pixiApp.view.addEventListener('contextmenu', (event) => {
       window.wasRightClick = true;
       event.preventDefault();
     });
-    containerElement.appendChild(this.pixiApp.view);
     this.assetLoader = new AssetLoader();
   }
 

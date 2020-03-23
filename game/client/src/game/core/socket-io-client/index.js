@@ -13,7 +13,7 @@ export default class SocketIoClient {
     });
   };
 
-  emit = (type, data) => {
-    this.socket.emit(type, data);
+  sendMessage = (type, data) => {
+    this.socket.emit('message', {type, data});
   };
 }

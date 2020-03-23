@@ -2,10 +2,10 @@ import Game from '../../../index';
 
 export default (data) => {
   const game = Game.instance;
-  const {username, authToken} = data;
+  const {direction, position} = data;
   game.state.player = {
     ...game.state.player,
-    username,
-    authToken,
+    direction,
+    position,
   };
 };

@@ -1,16 +1,15 @@
 const uuid = require('uuid').v4;
-const {AccountService} = require('../../../game/account/account-service');
 
 const commandHandlers = {
   'register': require('./command-handlers/register'),
   'login': require('./command-handlers/login'),
 };
 
-class ChatMessageHandlingService {
-  constructor({socketIo, socket, redisClient}) {
+module.exports = class ChatMessageHandlingService {
+  constructor({socketIo, socket}) {
     this.socketIo = socketIo;
     this.socket = socket;
-    this.redisClient = redisClient;
+    this.redisClient = global.gameServer.redisClient;
     this.sendChatMessage = (username, message, shouldBroadcast = false) => {
       (shouldBroadcast ? this.socketIo : this.socket).emit('message', {
         type: 'chat',
@@ -40,7 +39,7 @@ class ChatMessageHandlingService {
       return;
     }
     if (username && authToken) {
-      new AccountService({socket: this.socket, redisClient: this.redisClient})
+      global.gameServer.accountService
         .getAuthToken(username)
         .then((accountAuthToken) => {
           if (authToken === accountAuthToken) {
@@ -54,6 +53,4 @@ class ChatMessageHandlingService {
       this.sendChatMessage('[SYSTEM]', 'Login via "::login USERNAME PASSWORD"');
     }
   }
-}
-
-module.exports = ChatMessageHandlingService;
+};

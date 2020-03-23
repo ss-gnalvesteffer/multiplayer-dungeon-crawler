@@ -1,6 +1,6 @@
-const {AccountService, maxUsernameLength, maxPasswordLength} = require('../../../../game/account/account-service');
+const {maxUsernameLength, maxPasswordLength} = require('../../../../game/account/account-service');
 
-module.exports = ({message, sendChatMessage, socket, redisClient}) => {
+module.exports = ({message, sendChatMessage}) => {
   if (message.length !== 2) {
     sendChatMessage('[SYSTEM]', 'Invalid usage. Type "::register USERNAME PASSWORD"');
     return;
@@ -15,7 +15,7 @@ module.exports = ({message, sendChatMessage, socket, redisClient}) => {
     sendChatMessage('[SYSTEM]', `Password must not exceed ${maxPasswordLength} characters`);
     return;
   }
-  new AccountService({socket, redisClient}).register(
+  global.gameServer.accountService.register(
     username,
     password,
     () => {

@@ -5,5 +5,5 @@ webFontLoader.load({
   custom: {
     families: ['game'],
   },
-  active: () => new Game(document.getElementById('pixi-container')).start(),
+  active: () => new Game(document.getElementById('pixi-canvas')).start(),
 });
