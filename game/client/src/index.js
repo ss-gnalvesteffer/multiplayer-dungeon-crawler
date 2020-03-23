@@ -1,3 +1,9 @@
+import webFontLoader from 'webfontloader';
 import Game from './game'
 
-new Game(document.getElementById('pixi-container')).start();
+webFontLoader.load({
+  custom: {
+    families: ['game'],
+  },
+  active: () => new Game(document.getElementById('pixi-container')).start(),
+});
