@@ -5,7 +5,21 @@ const Direction = {
   WEST: 3,
 };
 
-export const getDirectionText = (direction) => {
+module.exports.getDirectionVector = (direction) => {
+  switch (direction) {
+    case Direction.NORTH:
+      return {x: 0, y: 1};
+    case Direction.EAST:
+      return {x: 1, y: 0};
+    case Direction.SOUTH:
+      return {x: 0, y: -1};
+    case Direction.WEST:
+      return {x: -1, y: 0};
+  }
+  return {x: 0, y: 0};
+};
+
+module.exports.getDirectionText = (direction) => {
   switch (direction) {
     case Direction.NORTH:
       return 'North';
@@ -19,4 +33,8 @@ export const getDirectionText = (direction) => {
   return '';
 };
 
-export default Direction;
+module.exports.addDirection = (direction, deltaDirection) => {
+  return (((direction + deltaDirection) % 4) + 4) % 4; // quick maths
+};
+
+module.exports.Values = Direction;

@@ -1,5 +1,5 @@
-module.exports = () => {
-  const app = global.gameServer.app;
+module.exports = (gameServer) => {
+  const app = gameServer.app;
   const isDev = process.argv[2] !== undefined;
 
   if (isDev) {

@@ -7,7 +7,6 @@ import UILayout from './entities/ui/ui-layout';
 import ChatLog from './entities/ui/chat-log';
 import ChatInput from './entities/ui/chat-input';
 import MainDisplay from './entities/main-display';
-import DIRECTION from './models/direction';
 import Context from './context';
 
 export default class Game {
@@ -15,15 +14,12 @@ export default class Game {
 
   state = {
     player: {
-      direction: DIRECTION.NORTH,
+      direction: -1,
       position: {x: 0, y: 0, z: 0},
     },
     chat: {
       inputMessage: '',
       messages: [],
-    },
-    log: {
-      messages: []
     },
     entities: {},
     map: {},

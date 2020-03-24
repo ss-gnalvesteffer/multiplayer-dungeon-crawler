@@ -1,6 +1,6 @@
 const {maxUsernameLength, maxPasswordLength} = require('../../../../game/account/account-service');
 
-module.exports = ({message, sendChatMessage}) => {
+module.exports = async ({message, sendChatMessage, gameServer}) => {
   if (message.length !== 2) {
     sendChatMessage('[SYSTEM]', 'Invalid usage. Type "::register USERNAME PASSWORD"');
     return;
@@ -15,7 +15,7 @@ module.exports = ({message, sendChatMessage}) => {
     sendChatMessage('[SYSTEM]', `Password must not exceed ${maxPasswordLength} characters`);
     return;
   }
-  global.gameServer.accountService.register(
+  await gameServer.accountService.register(
     username,
     password,
     () => {

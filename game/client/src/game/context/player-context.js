@@ -18,26 +18,26 @@ class PlayerContext {
   };
 
   turnLeft = () => {
-    Game.instance.socketIoClient.sendMessage('turn-left', {
-      authToken: this.getAuthToken(),
+    Game.instance.socketIoClient.sendMessage('turn', {
+      amount: -1,
     });
   };
 
   turnRight = () => {
-    Game.instance.socketIoClient.sendMessage('turn-right', {
-      authToken: this.getAuthToken(),
+    Game.instance.socketIoClient.sendMessage('turn', {
+      amount: 1,
     });
   };
 
   moveForward = () => {
-    Game.instance.socketIoClient.sendMessage('move-forward', {
-      authToken: this.getAuthToken(),
+    Game.instance.socketIoClient.sendMessage('step', {
+      amount: 1,
     });
   };
 
   moveBackward = () => {
-    Game.instance.socketIoClient.sendMessage('move-backward', {
-      authToken: this.getAuthToken(),
+    Game.instance.socketIoClient.sendMessage('step', {
+      amount: -1,
     });
   };
 }

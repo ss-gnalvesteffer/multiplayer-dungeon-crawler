@@ -4,8 +4,6 @@ class ChatContext {
   sendChatMessage(message) {
     const game = Game.instance;
     game.socketIoClient.sendMessage('chat', {
-      authToken: game.state.player.authToken,
-      username: game.state.player.username,
       message,
     });
   }

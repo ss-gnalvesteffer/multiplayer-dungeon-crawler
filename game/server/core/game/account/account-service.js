@@ -1,90 +1,71 @@
-const {promisify} = require('util');
 const uuid = require('uuid').v4;
 
 exports.maxUsernameLength = 12;
 exports.maxPasswordLength = 25;
 
 class AccountService {
-  constructor() {
-    const redisClient = global.gameServer.redisClient;
-    this.redisClientGetAsync = promisify(redisClient.get).bind(redisClient);
-    this.redisClientSetAsync = promisify(redisClient.set).bind(redisClient);
+  constructor(gameServer) {
+    this.redisClient = gameServer.redisClient;
   }
 
   getRedisAccountKey(username) {
     return `account:${username}`;
   }
 
-  getAccountByUsername(username) {
-    return this.redisClientGetAsync(this.getRedisAccountKey(username));
+  async getAccountByUsername(username) {
+    return await this.redisClient.get(this.getRedisAccountKey(username));
   }
 
-  getAccountPassword(username) {
-    return this.redisClientGetAsync(`${this.getRedisAccountKey(username)}:password`);
+  async getAccountPassword(username) {
+    return await this.redisClient.get(`${this.getRedisAccountKey(username)}:password`);
   }
 
-  setAccountPassword(username, password) {
-    return this.redisClientSetAsync(`${this.getRedisAccountKey(username)}:password`, password);
+  async setAccountPassword(username, password) {
+    return await this.redisClient.set(`${this.getRedisAccountKey(username)}:password`, password);
   }
 
-  createAccount(username, password) {
-    return this.redisClientSetAsync(`${this.getRedisAccountKey(username)}`, true)
-      .then(() => this.setAccountPassword(username, password));
+  async createAccount(username, password) {
+    await this.redisClient.set(`${this.getRedisAccountKey(username)}`, true);
+    await this.setAccountPassword(username, password);
   }
 
-  getAuthToken(username) {
-    return this.redisClientGetAsync(`${this.getRedisAccountKey(username)}:authToken`);
+  async getAuthToken(username) {
+    return await this.redisClient.get(`${this.getRedisAccountKey(username)}:authToken`);
   }
 
-  setAuthToken(username, authToken) {
-    return this.redisClientSetAsync(`${this.getRedisAccountKey(username)}:authToken`, authToken).then(() => authToken);
+  async setAuthToken(username, authToken) {
+    await this.redisClient.set(`${this.getRedisAccountKey(username)}:authToken`, authToken);
+    return authToken;
   }
 
-  register(username, password, onAccountCreationSuccess, onAccountCreationFail) {
-    this.getAccountByUsername(username)
-      .then((accountData) => {
-        if (accountData) {
-          onAccountCreationFail('an account already exists with this username');
-          return;
-        }
-        this.createAccount(username, password)
-          .then(onAccountCreationSuccess)
-          .then(() => this.login(
-            username,
-            password,
-            () => {
-            },
-            () => {
-            }
-            )
-          )
-          .catch(onAccountCreationFail);
-      })
-      .catch(onAccountCreationFail);
+  async isValidAuthToken(username, authToken) {
+    return await this.getAuthToken(username) === authToken;
   }
 
-  login(username, password, onLoginSuccess, onLoginFail) {
-    this.getAccountByUsername(username)
-      .then((account) => {
-        if (account) {
-          this.getAccountPassword(username)
-            .then((accountPassword) => {
-              if (password === accountPassword) {
-                this.setAuthToken(username, uuid())
-                  .then((authToken) => {
-                    onLoginSuccess(authToken);
-                  })
-                  .catch(onLoginFail);
-                return;
-              }
-              onLoginFail();
-            })
-            .catch(onLoginFail);
-          return;
-        }
+  async register(username, password, onAccountCreationSuccess, onAccountCreationFail) {
+    const account = await this.getAccountByUsername(username);
+    if (account) {
+      onAccountCreationFail('an account already exists with this username');
+      return;
+    }
+    await this.createAccount(username, password);
+    onAccountCreationSuccess();
+    await this.login(username, password, () => {
+    }, () => {
+    });
+  }
+
+  async login(username, password, onLoginSuccess, onLoginFail) {
+    const account = await this.getAccountByUsername(username);
+    if (account) {
+      const accountPassword = await this.getAccountPassword(username);
+      if (password === accountPassword) {
+        const authToken = await this.setAuthToken(username, uuid());
+        onLoginSuccess(authToken);
+      } else {
         onLoginFail();
-      })
-      .catch(onLoginFail);
+      }
+    }
   }
 }
 

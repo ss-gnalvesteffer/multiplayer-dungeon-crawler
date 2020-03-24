@@ -1,6 +1,6 @@
 const ChatMessageHandlingService = require('./chat-message-handling/chat-message-handling-service');
 
-module.exports = ({message, socketIo, socket}) => {
+module.exports = async ({message, socketIo, socket, gameServer}) => {
   console.log(`[CHAT] ${message.data.username}: ${message.data.message}`);
-  new ChatMessageHandlingService({socketIo, socket}).handleChatMessage(message.data);
+  await new ChatMessageHandlingService({socketIo, socket, gameServer}).handleChatMessage(message.data);
 };

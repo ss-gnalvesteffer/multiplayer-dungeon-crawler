@@ -6,10 +6,10 @@ const commandHandlers = {
 };
 
 module.exports = class ChatMessageHandlingService {
-  constructor({socketIo, socket}) {
+  constructor({socketIo, socket, gameServer}) {
     this.socketIo = socketIo;
     this.socket = socket;
-    this.redisClient = global.gameServer.redisClient;
+    this.redisClient = gameServer.redisClient;
     this.sendChatMessage = (username, message, shouldBroadcast = false) => {
       (shouldBroadcast ? this.socketIo : this.socket).emit('message', {
         type: 'chat',
@@ -21,36 +21,32 @@ module.exports = class ChatMessageHandlingService {
         },
       })
     };
-  }
 
-  handleChatMessage({authToken, username, message}) {
-    if (message.startsWith('::')) {
-      const messageParts = message.slice(2).split(' ');
-      const command = messageParts[0];
-      const messageHandler = commandHandlers[command];
-      if (messageHandler) {
-        messageHandler({
-          message: messageParts.splice(1),
-          socket: this.socket,
-          redisClient: this.redisClient,
-          sendChatMessage: this.sendChatMessage
-        });
+    this.handleChatMessage = async ({message, auth}) => {
+      if (message.startsWith('::')) {
+        const messageParts = message.slice(2).split(' ');
+        const command = messageParts[0];
+        const messageHandler = commandHandlers[command];
+        if (messageHandler) {
+          await messageHandler({
+            message: messageParts.splice(1),
+            socket: this.socket,
+            redisClient: this.redisClient,
+            sendChatMessage: this.sendChatMessage,
+            gameServer,
+          });
+        }
+        return;
       }
-      return;
-    }
-    if (username && authToken) {
-      global.gameServer.accountService
-        .getAuthToken(username)
-        .then((accountAuthToken) => {
-          if (authToken === accountAuthToken) {
-            this.sendChatMessage(username, message, true);
-          }
-        })
-        .catch();
-    } else {
-      this.sendChatMessage('[SYSTEM]', 'You are not logged in.');
-      this.sendChatMessage('[SYSTEM]', 'Register via "::register USERNAME PASSWORD"');
-      this.sendChatMessage('[SYSTEM]', 'Login via "::login USERNAME PASSWORD"');
-    }
+      if (auth.username && auth.authToken) {
+        if (await gameServer.accountService.isValidAuthToken(auth.username, auth.authToken)) {
+          this.sendChatMessage(auth.username, message, true);
+        }
+      } else {
+        this.sendChatMessage('[SYSTEM]', 'You are not logged in.');
+        this.sendChatMessage('[SYSTEM]', 'Register via "::register USERNAME PASSWORD"');
+        this.sendChatMessage('[SYSTEM]', 'Login via "::login USERNAME PASSWORD"');
+      }
+    };
   }
 };

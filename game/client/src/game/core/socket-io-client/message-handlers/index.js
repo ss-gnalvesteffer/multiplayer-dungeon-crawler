@@ -1,9 +1,9 @@
 import chat from './chat';
 import login from './login';
-import playerTransform from './player-transform';
+import playerTurned from './player-turned';
 
 export default {
   'chat': chat,
   'login': login,
-  'player-transform': playerTransform,
+  'player-turned': playerTurned,
 };
