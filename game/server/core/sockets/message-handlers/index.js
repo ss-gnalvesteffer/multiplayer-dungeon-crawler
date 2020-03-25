@@ -11,6 +11,10 @@ const messageHandlerMetadata = {
     isAuthorized: genericAuth,
     handler: require('./turn'),
   },
+  'step': {
+    isAuthorized: genericAuth,
+    handler: require('./step'),
+  },
 };
 
 module.exports = messageHandlerMetadata;
