@@ -14,15 +14,17 @@ export default class Game {
 
   state = {
     player: {
-      direction: -1,
+      direction: 0,
       position: {x: 0, y: 0, z: 0},
+    },
+    map: {
+      environmentId: 'grassland',
     },
     chat: {
       inputMessage: '',
       messages: [],
     },
     entities: {},
-    map: {},
   };
 
   constructor(canvas) {

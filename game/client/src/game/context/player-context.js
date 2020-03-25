@@ -1,6 +1,6 @@
 import Game from '../index';
 
-class PlayerContext {
+export default class PlayerContext {
   getUsername = () => {
     return Game.instance.state.player.username;
   };
@@ -41,5 +41,3 @@ class PlayerContext {
     });
   };
 }
-
-export default PlayerContext;

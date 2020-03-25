@@ -14,13 +14,16 @@ module.exports = {
   ui: {
     layout_texture_path: 'assets/ui/ui-layout.png',
   },
-  environment: {
-    grassland: {
+  environments: [
+    {
+      id: 'grassland',
       name: 'Grassland',
-      base_texture_path: 'assets/environment/grassland/base.png',
-    },
-  },
-  character: {
-
-  },
+      sky_north_texture_path: 'assets/environment/grassland/sky-north.png',
+      sky_east_texture_path: 'assets/environment/grassland/sky-east.png',
+      sky_south_texture_path: 'assets/environment/grassland/sky-south.png',
+      sky_west_texture_path: 'assets/environment/grassland/sky-west.png',
+      ground_texture_path: 'assets/environment/grassland/ground.png',
+    }
+  ],
+  character: {},
 };
