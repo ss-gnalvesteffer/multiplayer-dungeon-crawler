@@ -16,8 +16,8 @@ export default class MapContext {
     const playerContext = this.game.context.player;
     const playerPosition = playerContext.getPosition();
     const playerDirection = playerContext.getDirection();
-    const textureHash = Math.floor((playerPosition.x + playerPosition.y + playerPosition.z + playerDirection) % 2);
-    return this.getEnvironmentAssetData()[textureHash === 0 ? 'ground_texture_path_0' : 'ground_texture_path_1'];
+    const textureHash = Math.floor(Math.abs(playerPosition.x + playerPosition.y + playerPosition.z + playerDirection) % 4);
+    return this.getEnvironmentAssetData()['ground_texture_path_' + textureHash];
   };
 
   getSkyTexturePath = () => {
