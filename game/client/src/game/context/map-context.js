@@ -13,7 +13,11 @@ export default class MapContext {
   };
 
   getGroundTexturePath = () => {
-    return this.getEnvironmentAssetData().ground_texture_path;
+    const playerContext = this.game.context.player;
+    const playerPosition = playerContext.getPosition();
+    const playerDirection = playerContext.getDirection();
+    const textureHash = Math.floor((playerPosition.x + playerPosition.y + playerPosition.z + playerDirection) % 2);
+    return this.getEnvironmentAssetData()[textureHash === 0 ? 'ground_texture_path_0' : 'ground_texture_path_1'];
   };
 
   getSkyTexturePath = () => {

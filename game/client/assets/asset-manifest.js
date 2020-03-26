@@ -22,7 +22,8 @@ module.exports = {
       sky_east_texture_path: 'assets/environment/grassland/sky-east.png',
       sky_south_texture_path: 'assets/environment/grassland/sky-south.png',
       sky_west_texture_path: 'assets/environment/grassland/sky-west.png',
-      ground_texture_path: 'assets/environment/grassland/ground.png',
+      ground_texture_path_0: 'assets/environment/grassland/ground-0.png',
+      ground_texture_path_1: 'assets/environment/grassland/ground-1.png',
     }
   ],
   character: {},
