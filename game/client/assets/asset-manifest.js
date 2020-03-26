@@ -28,5 +28,38 @@ module.exports = {
       ground_texture_path_3: 'assets/environment/grassland/ground-3.png',
     }
   ],
-  character: {},
+  character: {
+    base: {
+      head: {
+        texture_path: 'assets/character/base/head.png',
+      },
+      left_arm: {
+        texture_path: 'assets/character/base/left-arm.png',
+      },
+      left_foot: {
+        texture_path: 'assets/character/base/left-foot.png',
+      },
+      left_hand: {
+        texture_path: 'assets/character/base/left-hand.png',
+      },
+      legs: {
+        texture_path: 'assets/character/base/legs.png',
+      },
+      right_arm: {
+        texture_path: 'assets/character/base/right-arm.png',
+      },
+      right_foot: {
+        texture_path: 'assets/character/base/right-foot.png',
+      },
+      right_hand_lower: {
+        texture_path: 'assets/character/base/right_hand_lower.png',
+      },
+      right_hand_upper: {
+        texture_path: 'assets/character/base/right_hand_upper.png',
+      },
+      torso: {
+        texture_path: 'assets/character/base/torso.png',
+      },
+    }
+  },
 };
