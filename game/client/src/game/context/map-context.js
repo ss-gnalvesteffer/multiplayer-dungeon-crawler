@@ -20,6 +20,10 @@ export default class MapContext {
     return this.getEnvironmentAssetData()['ground_texture_path_' + textureHash];
   };
 
+  getFogTexturePath = () => {
+    return this.getEnvironmentAssetData().fog_texture_path;
+  };
+
   getSkyTexturePath = () => {
     const environmentAssetData = this.getEnvironmentAssetData();
     const direction = this.game.context.player.getDirection();

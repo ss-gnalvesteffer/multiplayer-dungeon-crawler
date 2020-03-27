@@ -18,6 +18,7 @@ module.exports = {
     {
       id: 'grassland',
       name: 'Grassland',
+      fog_texture_path: 'assets/environment/grassland/fog.png',
       sky_north_texture_path: 'assets/environment/grassland/sky-north.png',
       sky_east_texture_path: 'assets/environment/grassland/sky-east.png',
       sky_south_texture_path: 'assets/environment/grassland/sky-south.png',
@@ -52,10 +53,10 @@ module.exports = {
         texture_path: 'assets/character/base/right-foot.png',
       },
       right_hand_lower: {
-        texture_path: 'assets/character/base/right_hand_lower.png',
+        texture_path: 'assets/character/base/right-hand-lower.png',
       },
       right_hand_upper: {
-        texture_path: 'assets/character/base/right_hand_upper.png',
+        texture_path: 'assets/character/base/right-hand-upper.png',
       },
       torso: {
         texture_path: 'assets/character/base/torso.png',
