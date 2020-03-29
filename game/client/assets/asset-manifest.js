@@ -16,18 +16,19 @@ module.exports = {
   },
   environments: [
     {
-      id: 'grassland',
-      name: 'Grassland',
-      fog_texture_path: 'assets/environment/grassland/fog.png',
-      sky_north_texture_path: 'assets/environment/grassland/sky-north.png',
-      sky_east_texture_path: 'assets/environment/grassland/sky-east.png',
-      sky_south_texture_path: 'assets/environment/grassland/sky-south.png',
-      sky_west_texture_path: 'assets/environment/grassland/sky-west.png',
-      ground_texture_path_0: 'assets/environment/grassland/ground-0.png',
-      ground_texture_path_1: 'assets/environment/grassland/ground-1.png',
-      ground_texture_path_2: 'assets/environment/grassland/ground-2.png',
-      ground_texture_path_3: 'assets/environment/grassland/ground-3.png',
-    }
+      id: 'dungeon',
+      name: 'Dungeon',
+      background_north_texture_path: 'assets/environment/dungeon/background-north.png',
+      background_east_texture_path: 'assets/environment/dungeon/background-east.png',
+      background_south_texture_path: 'assets/environment/dungeon/background-south.png',
+      background_west_texture_path: 'assets/environment/dungeon/background-west.png',
+      wall_back_left_texture_path: 'assets/environment/dungeon/wall-back-left.png',
+      wall_back_middle_texture_path: 'assets/environment/dungeon/wall-back-middle.png',
+      wall_back_right_texture_path: 'assets/environment/dungeon/wall-back-right.png',
+      wall_left_texture_path: 'assets/environment/dungeon/wall-left.png',
+      wall_right_texture_path: 'assets/environment/dungeon/wall-right.png',
+      wall_front_texture_path: 'assets/environment/dungeon/wall-front.png',
+    },
   ],
   character: {
     base: {

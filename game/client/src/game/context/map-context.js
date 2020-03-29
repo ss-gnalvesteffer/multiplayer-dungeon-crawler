@@ -12,30 +12,61 @@ export default class MapContext {
     return assetManifest.environments.find(environment => environment.id === environmentId);
   };
 
-  getGroundTexturePath = () => {
-    const playerContext = this.game.context.player;
-    const playerPosition = playerContext.getPosition();
-    const playerDirection = playerContext.getDirection();
-    const textureHash = Math.floor(Math.abs(playerPosition.x + playerPosition.y + playerPosition.z + playerDirection) % 4);
-    return this.getEnvironmentAssetData()['ground_texture_path_' + textureHash];
-  };
-
-  getFogTexturePath = () => {
-    return this.getEnvironmentAssetData().fog_texture_path;
-  };
-
-  getSkyTexturePath = () => {
+  getBackgroundTexturePath = () => {
     const environmentAssetData = this.getEnvironmentAssetData();
     const direction = this.game.context.player.getDirection();
     switch (direction) {
       case Direction.Values.NORTH:
-        return environmentAssetData.sky_north_texture_path;
+        return environmentAssetData.background_north_texture_path;
       case Direction.Values.EAST:
-        return environmentAssetData.sky_east_texture_path;
+        return environmentAssetData.background_east_texture_path;
       case Direction.Values.SOUTH:
-        return environmentAssetData.sky_south_texture_path;
+        return environmentAssetData.background_south_texture_path;
       case Direction.Values.WEST:
-        return environmentAssetData.sky_west_texture_path;
+        return environmentAssetData.background_west_texture_path;
     }
+  };
+
+  getWallTexturePaths = () => {
+    const environmentAssetData = this.getEnvironmentAssetData();
+    return {
+      wall_back_left_texture_path: environmentAssetData.wall_back_left_texture_path,
+      wall_back_middle_texture_path: environmentAssetData.wall_back_middle_texture_path,
+      wall_back_right_texture_path: environmentAssetData.wall_back_right_texture_path,
+      wall_left_texture_path: environmentAssetData.wall_left_texture_path,
+      wall_right_texture_path: environmentAssetData.wall_right_texture_path,
+      wall_front_texture_path: environmentAssetData.wall_front_texture_path,
+    };
+  };
+
+  getMapValueAtPosition = (x, y, {size, mapData}) => {
+    return mapData[x + (size * y)] || 0;
+  };
+
+  getWallVisibilityFlags = () => {
+    const position = this.game.context.player.getPosition();
+    const direction = this.game.context.player.getDirection();
+    const directionVector = Direction.getDirectionVector(direction);
+    const frontTilePosition = {x: position.x + directionVector.x, y: position.y + directionVector.y};
+    const backTilePosition = {x: frontTilePosition.x + directionVector.x, y: frontTilePosition.y + directionVector.y};
+
+    const map = this.game.state.map;
+    const getWallFlag = (x, y) => this.getMapValueAtPosition(x, y, {size: map.size, mapData: map.wallMap});
+
+    const frontWall = getWallFlag(frontTilePosition.x, frontTilePosition.y);
+    const leftWall = getWallFlag(frontTilePosition.x + directionVector.y, frontTilePosition.y - directionVector.x);
+    const rightWall = getWallFlag(frontTilePosition.x - directionVector.y, frontTilePosition.y + directionVector.x);
+    const backWallMiddle = getWallFlag(backTilePosition.x, backTilePosition.y);
+    const backWallLeft = getWallFlag(backTilePosition.x - directionVector.y, backTilePosition.y - directionVector.x);
+    const backWallRight = getWallFlag(backTilePosition.x + directionVector.y, backTilePosition.y + directionVector.x);
+
+    return {
+      frontWall,
+      leftWall,
+      rightWall,
+      backWallMiddle,
+      backWallLeft,
+      backWallRight,
+    };
   };
 }
