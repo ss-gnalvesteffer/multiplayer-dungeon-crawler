@@ -18,10 +18,11 @@ module.exports = async ({message, sendChatMessage, gameServer}) => {
   await gameServer.accountService.register(
     username,
     password,
-    () => {
+    async () => {
       sendChatMessage('[SYSTEM]', 'Account created!');
+      sendChatMessage('[SYSTEM]', 'You may now login via "::login USERNAME PASSWORD"');
     },
-    (errorMessage) => {
+    async (errorMessage) => {
       sendChatMessage('[SYSTEM]', `Registration failed: ${errorMessage}.`);
     }
   );

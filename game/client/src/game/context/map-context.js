@@ -2,13 +2,22 @@ import Direction from '../models/direction';
 import Game from '../index';
 import assetManifest from '../../../assets/asset-manifest';
 
+const maps = assetManifest.maps.reduce((acc, map) => {
+  acc[map.id] = map;
+  return acc;
+}, {});
+
 export default class MapContext {
   constructor() {
     this.game = Game.instance;
   }
 
+  getMapData = () => {
+    return maps[this.game.state.player.mapId || 'start'];
+  };
+
   getEnvironmentAssetData = () => {
-    const environmentId = this.game.state.map.environmentId;
+    const environmentId = this.getMapData().environment_id;
     return assetManifest.environments.find(environment => environment.id === environmentId);
   };
 
@@ -42,8 +51,11 @@ export default class MapContext {
     };
   };
 
-  getMapValueAtPosition = (x, y, {size, mapData}) => {
-    return mapData[x + (size * y)] || 0;
+  getMapValueAtPosition = (x, y, size, mapData) => {
+    if (x < 0 || y < 0 || x >= size || y >= size) {
+      return 0;
+    }
+    return mapData[x + (size * y)];
   };
 
   getWallVisibilityFlags = () => {
@@ -53,8 +65,8 @@ export default class MapContext {
     const frontTilePosition = {x: position.x + directionVector.x, y: position.y + directionVector.y};
     const backTilePosition = {x: frontTilePosition.x + directionVector.x, y: frontTilePosition.y + directionVector.y};
 
-    const map = this.game.state.map;
-    const getWallFlag = (x, y) => this.getMapValueAtPosition(x, y, {size: map.size, mapData: map.wallMap});
+    const map = this.getMapData();
+    const getWallFlag = (x, y) => this.getMapValueAtPosition(x, y, map.size, map.tile_id_map);
 
     const frontWall = getWallFlag(frontTilePosition.x, frontTilePosition.y);
     const leftWall = getWallFlag(frontTilePosition.x + directionVector.y, frontTilePosition.y - directionVector.x);

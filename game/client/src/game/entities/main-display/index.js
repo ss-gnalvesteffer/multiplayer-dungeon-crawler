@@ -52,6 +52,6 @@ export default class MainDisplay extends Entity {
     this.frontWallSprite.texture = this.getTexture(wallTexturePaths.wall_front_texture_path);
     this.frontWallSprite.visible = wallVisibilityFlags.frontWall;
 
-    this.directionText.text = `${getDirectionText(game.state.player.direction)}\nX:${game.state.player.position.x} Y:${game.state.player.position.y} Z:${game.state.player.position.z}`;
+    this.directionText.text = `${game.state.player.mapId}\n${getDirectionText(game.state.player.direction)}\nX:${game.state.player.position.x} Y:${game.state.player.position.y}`;
   };
 }

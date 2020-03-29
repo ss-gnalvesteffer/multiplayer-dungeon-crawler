@@ -1,4 +1,5 @@
 const uuid = require('uuid').v4;
+const PlayerService = require('../player/player-service');
 
 exports.maxUsernameLength = 12;
 exports.maxPasswordLength = 25;
@@ -6,6 +7,7 @@ exports.maxPasswordLength = 25;
 class AccountService {
   constructor(gameServer) {
     this.redisClient = gameServer.redisClient;
+    this.gameServer = gameServer;
   }
 
   getRedisAccountKey(username) {
@@ -27,6 +29,10 @@ class AccountService {
   async createAccount(username, password) {
     await this.redisClient.set(`${this.getRedisAccountKey(username)}`, true);
     await this.setAccountPassword(username, password);
+    const playerService = new PlayerService({gameServer: this.gameServer, username});
+    await playerService.setMapId('start');
+    await playerService.setPositionX(1);
+    await playerService.setPositionY(1);
   }
 
   async getAuthToken(username) {
@@ -43,27 +49,25 @@ class AccountService {
   }
 
   async register(username, password, onAccountCreationSuccess, onAccountCreationFail) {
-    const account = await this.getAccountByUsername(username);
+    const sanitizedUsername = (username || '').trim();
+    const account = await this.getAccountByUsername(sanitizedUsername);
     if (account) {
-      onAccountCreationFail('an account already exists with this username');
+      await onAccountCreationFail('an account already exists with this username');
       return;
     }
-    await this.createAccount(username, password);
-    onAccountCreationSuccess();
-    await this.login(username, password, () => {
-    }, () => {
-    });
+    await this.createAccount(sanitizedUsername, password);
+    await onAccountCreationSuccess();
   }
 
-  async login(username, password, onLoginSuccess, onLoginFail) {
-    const account = await this.getAccountByUsername(username);
+  async login(username, password) {
+    const sanitizedUsername = username.trim();
+    const account = await this.getAccountByUsername(sanitizedUsername);
     if (account) {
-      const accountPassword = await this.getAccountPassword(username);
+      const accountPassword = await this.getAccountPassword(sanitizedUsername);
       if (password === accountPassword) {
-        const authToken = await this.setAuthToken(username, uuid());
-        onLoginSuccess(authToken);
+        return await this.setAuthToken(sanitizedUsername, uuid());
       } else {
-        onLoginFail();
+        return undefined;
       }
     }
   }
