@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import { v4 } from 'uuid';
 import Game from '../index';
 import { Loader } from 'pixi.js';
@@ -5,6 +6,11 @@ import { Loader } from 'pixi.js';
 export default class Entity {
   id = v4();
   entities = {};
+
+  constructor() {
+    this.container = new PIXI.Container();
+    this.getGame().pixiApp.stage.addChild(this.container);
+  }
 
   getGame = () => {
     return Game.instance;
@@ -23,7 +29,7 @@ export default class Entity {
     if (entity instanceof Entity) {
       game.state.entities[entity.id] = entity;
     } else {
-      game.pixiApp.stage.addChild(entity);
+      this.container.addChild(entity);
     }
     this.entities[entity] = entity;
   };

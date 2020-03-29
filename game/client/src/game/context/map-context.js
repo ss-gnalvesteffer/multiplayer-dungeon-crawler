@@ -21,26 +21,31 @@ export default class MapContext {
     return assetManifest.environments.find(environment => environment.id === environmentId);
   };
 
+  getTextureHash = () => {
+    const playerPosition = this.game.context.player.getPosition();
+    const playerDirection = this.game.context.player.getDirection();
+    return Math.abs(Math.floor(parseInt(playerPosition.x + playerPosition.y + playerDirection) % 2));
+  };
+
   getBackgroundTexturePath = () => {
     const environmentAssetData = this.getEnvironmentAssetData();
     const direction = this.game.context.player.getDirection();
+    const textureHash = this.getTextureHash();
     switch (direction) {
       case Direction.Values.NORTH:
-        return environmentAssetData.background_north_texture_path;
+        return environmentAssetData[`background_north_texture_path_${textureHash}`];
       case Direction.Values.EAST:
-        return environmentAssetData.background_east_texture_path;
+        return environmentAssetData[`background_east_texture_path_${textureHash}`];
       case Direction.Values.SOUTH:
-        return environmentAssetData.background_south_texture_path;
+        return environmentAssetData[`background_south_texture_path_${textureHash}`];;
       case Direction.Values.WEST:
-        return environmentAssetData.background_west_texture_path;
+        return environmentAssetData[`background_west_texture_path_${textureHash}`];
     }
   };
 
   getWallTexturePaths = () => {
     const environmentAssetData = this.getEnvironmentAssetData();
-    const playerPosition = this.game.context.player.getPosition();
-    const playerDirection = this.game.context.player.getDirection();
-    const textureHash = Math.abs(Math.floor(parseInt(playerPosition.x + playerPosition.y + playerDirection) % 2));
+    const textureHash = this.getTextureHash();
     return {
       wall_back_left_texture_path: environmentAssetData.wall_back_left_texture_path,
       wall_back_middle_texture_path: environmentAssetData.wall_back_middle_texture_path,
