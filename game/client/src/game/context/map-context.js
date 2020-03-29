@@ -29,13 +29,16 @@ export default class MapContext {
 
   getWallTexturePaths = () => {
     const environmentAssetData = this.getEnvironmentAssetData();
+    const playerPosition = this.game.context.player.getPosition();
+    const playerDirection = this.game.context.player.getDirection();
+    const textureHash = Math.abs(Math.floor(parseInt(playerPosition.x + playerPosition.y + playerDirection) % 2));
     return {
       wall_back_left_texture_path: environmentAssetData.wall_back_left_texture_path,
       wall_back_middle_texture_path: environmentAssetData.wall_back_middle_texture_path,
       wall_back_right_texture_path: environmentAssetData.wall_back_right_texture_path,
-      wall_left_texture_path: environmentAssetData.wall_left_texture_path,
-      wall_right_texture_path: environmentAssetData.wall_right_texture_path,
-      wall_front_texture_path: environmentAssetData.wall_front_texture_path,
+      wall_left_texture_path: environmentAssetData[`wall_left_texture_path_${textureHash}`],
+      wall_right_texture_path: environmentAssetData[`wall_right_texture_path_${textureHash}`],
+      wall_front_texture_path: environmentAssetData[`wall_front_texture_path_${textureHash}`],
     };
   };
 
