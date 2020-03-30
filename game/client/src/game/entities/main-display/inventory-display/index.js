@@ -5,7 +5,7 @@ export default class InventoryDisplay extends Entity {
   constructor(container) {
     super(container);
     this.modularCharacter = new ModularCharacter(this.container);
-    this.modularCharacter.setPosition(205 / 2, 164);
+    this.modularCharacter.setPosition(205 / 2, 164 - 16);
   }
 
   update = () => {

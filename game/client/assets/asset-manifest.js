@@ -116,7 +116,7 @@ module.exports = {
     },
   ],
   character: {
-    pivot_position: {x: 10, y: 103},
+    pivot_position: {x: 10, y: 85},
     body_parts: {
       head: {
         texture_path: 'assets/character/base/head.png',
