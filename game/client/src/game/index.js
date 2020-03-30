@@ -13,6 +13,7 @@ export default class Game {
   static instance;
 
   state = {
+    time: 0,
     player: {
       mapId: 'dungeon-0',
       position: {x: 1, y: 2},
@@ -71,6 +72,7 @@ export default class Game {
 
   update = (deltaTime) => {
     Object.keys(this.state.entities).forEach(entityId => this.state.entities[entityId].update(deltaTime));
+    this.state.time += deltaTime;
     Keyboard.update();
     Mouse.update();
   };

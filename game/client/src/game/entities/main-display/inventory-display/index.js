@@ -2,8 +2,8 @@ import Entity from '../../entity-base';
 import ModularCharacter from '../../modular-character';
 
 export default class InventoryDisplay extends Entity {
-  constructor() {
-    super();
+  constructor(container) {
+    super(container);
     this.modularCharacter = new ModularCharacter(this.container);
     this.modularCharacter.setPosition(205 / 2, 164);
   }
