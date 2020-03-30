@@ -1,3 +1,5 @@
+const Item = require('../src/game/models/item');
+
 module.exports = {
   audio: {
     music: [
@@ -103,6 +105,16 @@ module.exports = {
       ],
     },
   ],
+  items: [
+    {
+      id: 'arming-dagger',
+      name: 'Arming Dagger',
+      type: Item.type.WEAPON,
+      equipType: Item.equipType.RIGHT_HAND,
+      wielded_texture_path: 'assets/items/right-hand/weapons/arming-dagger/wielded.png',
+      wield_position: {x: 23, y: 23},
+    },
+  ],
   character: {
     pivot_position: {x: 10, y: 103},
     body_parts: {
@@ -145,6 +157,7 @@ module.exports = {
       right_hand_lower: {
         texture_path: 'assets/character/base/right-hand-lower.png',
         pivot_position: {x: 6, y: 2},
+        wield_position: {x: 4, y: 5},
       },
       right_hand_upper: {
         texture_path: 'assets/character/base/right-hand-upper.png',

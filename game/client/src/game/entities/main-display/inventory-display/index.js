@@ -9,7 +9,9 @@ export default class InventoryDisplay extends Entity {
   }
 
   update = () => {
+    const playerContext = this.getContext().player;
     this.modularCharacter.update();
-    this.modularCharacter.setSkinColor(this.getContext().player.getSkinColor());
+    this.modularCharacter.setSkinColor(playerContext.getSkinColor());
+    this.modularCharacter.setEquipment({rightHandItemId: 'arming-dagger'});
   };
 }

@@ -43,6 +43,10 @@ export default class ModularCharacter extends EntityBase {
     this.rightHandLowerSprite.position.set(rightArmAssetData.right_hand_connection_position.x, rightArmAssetData.right_hand_connection_position.y);
     this.rightArmSprite.addChild(this.rightHandLowerSprite);
 
+    this.rightHandEquipmentSprite = new PIXI.Sprite();
+    this.rightHandEquipmentSprite.position.set(rightHandLowerAssetData.wield_position.x, rightHandLowerAssetData.wield_position.y);
+    this.rightHandLowerSprite.addChild(this.rightHandEquipmentSprite);
+
     const rightHandUpperAssetData = bodyParts.right_hand_upper;
     this.rightHandUpperSprite = new PIXI.Sprite(this.getTexture(rightHandUpperAssetData.texture_path));
     this.rightHandUpperSprite.pivot.set(rightHandUpperAssetData.pivot_position.x, rightHandUpperAssetData.pivot_position.y);
@@ -87,9 +91,17 @@ export default class ModularCharacter extends EntityBase {
     this.leftHandSprite.tint = skinColor;
   };
 
-  // setEquipment = (equipment) => {
-  //
-  // };
+  setEquipment = ({rightHandItemId}) => {
+    const itemsContext = this.getContext().items;
+
+    const rightHandItem = itemsContext.getItemAssetData(rightHandItemId);
+    if (rightHandItem) {
+      this.rightHandEquipmentSprite.texture = this.getTexture(rightHandItem.wielded_texture_path);
+      this.rightHandEquipmentSprite.pivot = rightHandItem.wield_position;
+    } else {
+      this.rightHandEquipmentSprite.texture = undefined;
+    }
+  };
 
   setPosition = (x, y) => {
     this.container.position.set(x, y);
