@@ -113,6 +113,8 @@ module.exports = {
       equipType: Item.equipType.RIGHT_HAND,
       wielded_texture_path: 'assets/items/right-hand/weapons/arming-dagger/wielded.png',
       wield_position: {x: 23, y: 23},
+      perspective_texture_path: 'assets/items/right-hand/weapons/arming-dagger/perspective.png',
+      perspective_position: {x: 29, y: 83},
     },
   ],
   character: {

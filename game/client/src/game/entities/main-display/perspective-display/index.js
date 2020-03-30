@@ -30,6 +30,10 @@ export default class PerspectiveDisplay extends Entity {
     this.frontWallSprite = new PIXI.Sprite();
     this.addDrawable(this.frontWallSprite);
 
+    this.rightHandEquipmentSprite = new PIXI.Sprite();
+    this.rightHandEquipmentSprite.position.set(205 - 8, 164);
+    this.addDrawable(this.rightHandEquipmentSprite);
+
     this.infoText = new Text('', {scale: 0.75, fill: '#ffffff', align: 'center'});
     this.infoText.anchor.set(0.5, 0);
     this.infoText.position.set(205 / 2, 2);
@@ -38,6 +42,7 @@ export default class PerspectiveDisplay extends Entity {
 
   update = () => {
     const game = this.getGame();
+    const context = this.getContext();
     const time = game.state.time;
 
     // torch flicker
@@ -59,6 +64,10 @@ export default class PerspectiveDisplay extends Entity {
     this.rightWallSprite.visible = wallVisibilityFlags.rightWall;
     this.frontWallSprite.texture = this.getTexture(wallTexturePaths.wall_front_texture_path);
     this.frontWallSprite.visible = wallVisibilityFlags.frontWall;
+
+    const rightHandItem = context.items.getItemAssetData('arming-dagger');
+    this.rightHandEquipmentSprite.texture = this.getTexture(rightHandItem.perspective_texture_path);
+    this.rightHandEquipmentSprite.pivot = rightHandItem.perspective_position;
 
     this.infoText.text = `${game.state.player.mapId}\n${getDirectionText(game.state.player.direction)}\nX:${game.state.player.position.x} Y:${game.state.player.position.y}`;
   };
