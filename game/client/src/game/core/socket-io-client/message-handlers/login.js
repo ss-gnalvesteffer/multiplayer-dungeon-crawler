@@ -7,8 +7,6 @@ export default (data) => {
     ...game.state.player,
     username,
     authToken,
-    mapId: playerData.mapId,
-    position: playerData.position,
-    direction: playerData.direction,
+    ...playerData,
   };
 };

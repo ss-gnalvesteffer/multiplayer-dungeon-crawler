@@ -13,10 +13,10 @@ export default class ChatInput extends Entity {
     super();
     this.playerNameText = new Text('', {fill: '#000000'});
     this.playerNameText.position.set(xPosition, yPosition);
-    this.addToStage(this.playerNameText);
+    this.addDrawable(this.playerNameText);
 
     this.inputMessageText = new Text('', {fill: '#0000ff'});
-    this.addToStage(this.inputMessageText);
+    this.addDrawable(this.inputMessageText);
   }
 
   update = () => {

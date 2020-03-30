@@ -7,8 +7,8 @@ export default class Entity {
   id = v4();
   entities = {};
 
-  constructor() {
-    this.container = new PIXI.Container();
+  constructor(container) {
+    this.container = container || new PIXI.Container();
     this.getGame().pixiApp.stage.addChild(this.container);
   }
 
@@ -24,7 +24,7 @@ export default class Entity {
     return Loader.shared.resources[texturePath].texture;
   };
 
-  addToStage = (entity) => {
+  addDrawable = (entity) => {
     const game = this.getGame();
     if (entity instanceof Entity) {
       game.state.entities[entity.id] = entity;

@@ -45,11 +45,20 @@ module.exports = class PlayerService {
       await redisClient.set(`player:${username}:mapId`, mapId);
     };
 
+    this.getSkinColor = async () => {
+      return parseInt(await redisClient.get(`player:${username}:skinColor`));
+    };
+
+    this.setSkinColor = async (value) => {
+      await redisClient.set(`player:${username}:skinColor`, value || 0x000000);
+    };
+
     this.getPlayerData = async () => {
       return {
         direction: await this.getDirection(),
         position: await this.getPosition(),
         mapId: await this.getMapId(),
+        skinColor: await this.getSkinColor(),
       };
     };
 

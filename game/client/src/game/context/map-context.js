@@ -37,7 +37,7 @@ export default class MapContext {
       case Direction.Values.EAST:
         return environmentAssetData[`background_east_texture_path_${textureHash}`];
       case Direction.Values.SOUTH:
-        return environmentAssetData[`background_south_texture_path_${textureHash}`];;
+        return environmentAssetData[`background_south_texture_path_${textureHash}`];
       case Direction.Values.WEST:
         return environmentAssetData[`background_west_texture_path_${textureHash}`];
     }

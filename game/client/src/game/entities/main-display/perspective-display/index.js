@@ -8,28 +8,28 @@ export default class PerspectiveDisplay extends Entity {
     super();
 
     this.backgroundSprite = new PIXI.Sprite();
-    this.addToStage(this.backgroundSprite);
+    this.addDrawable(this.backgroundSprite);
 
     this.groundSprite = new PIXI.Sprite();
-    this.addToStage(this.groundSprite);
+    this.addDrawable(this.groundSprite);
 
     this.backWallLeftSprite = new PIXI.Sprite();
-    this.addToStage(this.backWallLeftSprite);
+    this.addDrawable(this.backWallLeftSprite);
     this.backWallMiddleSprite = new PIXI.Sprite();
-    this.addToStage(this.backWallMiddleSprite);
+    this.addDrawable(this.backWallMiddleSprite);
     this.backWallRightSprite = new PIXI.Sprite();
-    this.addToStage(this.backWallRightSprite);
+    this.addDrawable(this.backWallRightSprite);
     this.leftWallSprite = new PIXI.Sprite();
-    this.addToStage(this.leftWallSprite);
+    this.addDrawable(this.leftWallSprite);
     this.rightWallSprite = new PIXI.Sprite();
-    this.addToStage(this.rightWallSprite);
+    this.addDrawable(this.rightWallSprite);
     this.frontWallSprite = new PIXI.Sprite();
-    this.addToStage(this.frontWallSprite);
+    this.addDrawable(this.frontWallSprite);
 
     this.directionText = new Text('', {scale: 0.75, fill: '#ffffff', align: 'center'});
     this.directionText.anchor.set(0.5, 0);
     this.directionText.position.set(205 / 2, 2);
-    this.addToStage(this.directionText);
+    this.addDrawable(this.directionText);
   }
 
   update = () => {

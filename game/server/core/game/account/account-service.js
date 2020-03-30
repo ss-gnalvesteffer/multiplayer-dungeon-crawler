@@ -33,6 +33,7 @@ class AccountService {
     await playerService.setMapId('start');
     await playerService.setPositionX(1);
     await playerService.setPositionY(1);
+    await playerService.setSkinColor(0xd19d6d);
   }
 
   async getAuthToken(username) {

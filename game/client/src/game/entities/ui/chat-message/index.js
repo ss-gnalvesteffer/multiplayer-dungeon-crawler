@@ -9,10 +9,10 @@ export default class ChatMessage extends Entity {
     this.position = {x, y};
     this.usernameText = new Text('', {fill: '#000000'});
     this.usernameText.position.set(x, y);
-    this.addToStage(this.usernameText);
+    this.addDrawable(this.usernameText);
 
     this.messageText = new Text('', {fill: '#600000'});
-    this.addToStage(this.messageText);
+    this.addDrawable(this.messageText);
   }
 
   update = () => {

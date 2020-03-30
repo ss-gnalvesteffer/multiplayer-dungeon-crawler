@@ -15,12 +15,16 @@ export default class Game {
   state = {
     player: {
       mapId: 'dungeon-0',
-      position: {x: 0, y: 0, z: 0},
-      direction: 0,
+      position: {x: 1, y: 2},
+      direction: 1,
+      skinColor: 0xffffff,
     },
     chat: {
       inputMessage: '',
       messages: [],
+    },
+    ui: {
+      isInventoryOpen: false,
     },
     entities: {},
   };
@@ -29,7 +33,7 @@ export default class Game {
     Game.instance = this;
     this.context = new Context();
     this.socketIoClient = new SocketIoClient();
-    this.resolution = window.devicePixelRatio * 8;
+    this.resolution = window.devicePixelRatio * 4;
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
     this.pixiApp = new PIXI.Application({
       width: 320,

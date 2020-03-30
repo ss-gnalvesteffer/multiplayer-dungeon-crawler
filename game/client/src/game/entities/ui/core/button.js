@@ -1,5 +1,6 @@
-import Entity from '../../entity-base';
+import * as PIXI from 'pixi.js';
 import * as Mouse from 'pixi.js-mouse';
+import Entity from '../../entity-base';
 
 const isPositionWithinButtonBounds = (positionX, positionY, bounds) => {
   return (
@@ -11,13 +12,24 @@ const isPositionWithinButtonBounds = (positionX, positionY, bounds) => {
 };
 
 class Button extends Entity {
-  constructor(positionX, positionY, width, height, onClick) {
+  constructor(x, y, width, height, onClick, spriteX, spriteY, inactiveTexture, activeTexture, isActive = () => false) {
     super();
-    this.positionX = positionX;
-    this.positionY = positionY;
+    this.positionX = x;
+    this.positionY = y;
     this.width = width;
     this.height = height;
     this.onClick = onClick;
+    if (inactiveTexture) {
+      this.inactiveSprite = new PIXI.Sprite(inactiveTexture);
+      this.inactiveSprite.position.set(spriteX, spriteY);
+      this.addDrawable(this.inactiveSprite);
+    }
+    if (activeTexture) {
+      this.activeSprite = new PIXI.Sprite(activeTexture);
+      this.activeSprite.position.set(spriteX, spriteY);
+      this.addDrawable(this.activeSprite);
+    }
+    this.isActive = isActive;
   }
 
   get bounds() {
@@ -32,11 +44,15 @@ class Button extends Entity {
   update = () => {
     const context = this.getContext();
     const mousePosition = context.ui.getRelativeMousePosition();
-    if (
-      Mouse.isButtonPressed(Mouse.Button.LEFT) &&
-      isPositionWithinButtonBounds(mousePosition.x, mousePosition.y, this.bounds)
-    ) {
-      this.onClick();
+    if (isPositionWithinButtonBounds(mousePosition.x, mousePosition.y, this.bounds)) {
+      if (Mouse.isButtonPressed(Mouse.Button.LEFT)) {
+        this.onClick();
+      }
+    }
+    if (this.activeSprite) {
+      const isActive = this.isActive();
+      this.inactiveSprite.visible = !isActive;
+      this.activeSprite.visible = isActive;
     }
   };
 }

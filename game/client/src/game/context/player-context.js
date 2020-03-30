@@ -1,12 +1,19 @@
 import Game from '../index';
+import InventoryContext from './inventory-context';
 
 export default class PlayerContext {
+  inventory = new InventoryContext(this);
+
   getUsername = () => {
     return Game.instance.state.player.username;
   };
 
   getAuthToken = () => {
     return Game.instance.state.player.authToken;
+  };
+
+  getSkinColor = () => {
+    return Game.instance.state.player.skinColor || 0xffffff;
   };
 
   getPosition = () => {
@@ -39,5 +46,9 @@ export default class PlayerContext {
     Game.instance.socketIoClient.sendMessage('step', {
       amount: -1,
     });
+  };
+
+  interact = () => {
+
   };
 }
