@@ -65,7 +65,7 @@ export default class PerspectiveDisplay extends Entity {
     this.frontWallSprite.texture = this.getTexture(wallTexturePaths.wall_front_texture_path);
     this.frontWallSprite.visible = wallVisibilityFlags.frontWall;
 
-    const rightHandItem = context.items.getItemAssetData('arming-dagger');
+    const rightHandItem = context.items.getItemAssetData('arming-sword');
     this.rightHandEquipmentSprite.texture = this.getTexture(rightHandItem.perspective_texture_path);
     this.rightHandEquipmentSprite.pivot = rightHandItem.perspective_position;
 
